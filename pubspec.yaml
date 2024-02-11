@@ -41,6 +41,7 @@ dependencies:
   dio: ^5.4.0
   socket_io_client: ^2.0.3+1
   feather_icons: ^1.2.0
+  hawk_fab_menu: ^1.2.0
 
 dev_dependencies:
   flutter_test:
