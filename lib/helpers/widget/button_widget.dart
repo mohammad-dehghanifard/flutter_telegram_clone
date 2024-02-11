@@ -23,11 +23,12 @@ class ButtonWidget extends StatelessWidget {
         onPressed: onPress,
         minWidth: width,
         height: height,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius)
         ),
         color: primary? context.theme.colorScheme.primary : context.theme.colorScheme.secondary,
-        child: Text(text,style: context.textTheme.bodyMedium!.apply(color: Colors.white)),
+        child: Text(text,style: context.textTheme.titleMedium!.apply(color: Colors.white)),
     );
   }
 }

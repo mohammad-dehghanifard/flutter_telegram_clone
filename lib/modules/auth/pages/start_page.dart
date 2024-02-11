@@ -18,9 +18,12 @@ class StartPage extends StatelessWidget {
             children: [
               const Spacer(),
               Image.asset(context.isDarkMode? "assets/images/logo_dark.png" :"assets/images/logo_light.png"),
-              H(MediaQuery.sizeOf(context).height * 0.08),
+              H(MediaQuery.sizeOf(context).height * 0.20),
               // buttons
               ButtonWidget(onPress: () {}, text: "ثبت نام",primary: false),
+              const H(15),
+              ButtonWidget(onPress: () {}, text: "ورود"),
+              H(MediaQuery.sizeOf(context).height * 0.04),
             ],
           ),
         ),
