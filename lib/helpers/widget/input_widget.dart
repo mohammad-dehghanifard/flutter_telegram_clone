@@ -1,3 +1,4 @@
+import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class _InputWidgetState extends State<InputWidget> {
             }
           },
           child: Icon(
-              widget.type == TextInputType.visiblePassword?  (_obscure?  CupertinoIcons.eye  : CupertinoIcons.eye_slash )
+              widget.type == TextInputType.visiblePassword?  (_obscure?  FeatherIcons.eye  : FeatherIcons.eyeOff )
                   : widget.icon,
               color: const Color(0xFF959595)),
         ),

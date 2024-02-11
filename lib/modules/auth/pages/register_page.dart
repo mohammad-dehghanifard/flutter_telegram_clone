@@ -1,4 +1,6 @@
+import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
@@ -26,7 +28,7 @@ class RegisterPage extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 32,vertical: 48),
                   decoration: BoxDecoration(
                     color: context.theme.scaffoldBackgroundColor,
                     borderRadius: const BorderRadius.only(
@@ -34,10 +36,28 @@ class RegisterPage extends StatelessWidget {
                       topLeft: Radius.circular(32),
                     )
                   ),
-                  child: const Column(
-                    children: [
-                      InputWidget(hintText: "نام و نام خانوادگی",type: TextInputType.visiblePassword,)
-                    ],
+                  child:  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // full name
+                        const InputWidget(hintText: "نام و نام خانوادگی",icon: FeatherIcons.user),
+                        const H(15),
+                        // phone number
+                        const InputWidget(hintText: "شماره موبایل",icon: FeatherIcons.smartphone,type: TextInputType.phone),
+                        const H(15),
+                        // password
+                        const InputWidget(hintText: "رمز عبور",type: TextInputType.visiblePassword),
+                        const H(15),
+                        // repeat password
+                        const InputWidget(hintText: "تکرار رمز عبور",type: TextInputType.visiblePassword),
+                        const H(15),
+                        // set image
+                        const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
+                        H(MediaQuery.sizeOf(context).height * 0.05),
+                        // button
+                        ButtonWidget(onPress: () {}, text: "ثبت نام")
+                      ],
+                    ),
                   ),
                 ),
               )
