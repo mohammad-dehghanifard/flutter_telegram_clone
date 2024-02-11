@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/modules/home/widgets/home_app_bar.dart';
+import 'package:flutter_telegram_clone/modules/home/widgets/home_tab_bar_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,7 +11,10 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            HomeAppBarWidget()
+            // app bar
+            HomeAppBarWidget(),
+            // tab bar
+            HomeTabBarWidget()
           ],
         ),
       ),
