@@ -42,7 +42,7 @@ class ThemeManager{
   static const TextTheme _textTheme = TextTheme(
     bodyMedium: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),
     bodySmall: TextStyle(fontSize: 12,fontWeight: FontWeight.w500),
-    titleLarge: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),
+    titleLarge: TextStyle(fontSize: 20,fontWeight: FontWeight.w900),
     titleMedium: TextStyle(fontSize: 16,fontWeight: FontWeight.w700),
     titleSmall: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
   );
