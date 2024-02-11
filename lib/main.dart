@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
+import 'package:flutter_telegram_clone/modules/auth/pages/start_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -26,17 +28,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeManager.light,
       darkTheme: ThemeManager.dark,
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      home: const StartPage(),
     );
   }
 }
 
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
