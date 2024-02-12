@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeManager{
   ThemeManager._();
@@ -48,11 +49,26 @@ class ThemeManager{
     titleSmall: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
   );
 
-  static void changeTheme() {
+  static Future<void> changeTheme() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
     if(Get.isDarkMode){
       Get.changeTheme(light);
+      await preferences.setString("theme","light");
     } else {
       Get.changeTheme(dark);
+      await preferences.setString("theme","dark");
+    }
+  }
+
+  static Future<void> loadTheme() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final theme = preferences.getString("theme");
+    if(theme != null){
+      if(theme == 'light'){
+        Get.changeTheme(light);
+      } else {
+        Get.changeTheme(dark);
+      }
     }
   }
 

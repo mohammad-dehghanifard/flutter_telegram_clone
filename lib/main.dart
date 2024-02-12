@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('fa'),
       ],
+      onInit: () => ThemeManager.loadTheme(),
       locale: const Locale('fa'),
       title: 'Telegram Clone',
       theme: ThemeManager.light,
