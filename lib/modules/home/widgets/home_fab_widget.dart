@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/send_new_message_page.dart';
 import 'package:get/get.dart';
 import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
@@ -21,7 +22,7 @@ class HomeFabWidget extends StatelessWidget {
           items: [
             HawkFabMenuItem(
               label: 'پیام جدید',
-              ontap: () {},
+              ontap: () => Get.to(const SendNewMessagePage()),
               labelColor: Colors.black,
               color: const Color(0xFF702DFF),
               icon: const Icon(FeatherIcons.user),
