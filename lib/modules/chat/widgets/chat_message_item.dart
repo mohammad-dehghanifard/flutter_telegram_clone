@@ -15,32 +15,51 @@ class ChatMessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: chat.isSendMessage? Alignment.centerRight :Alignment.centerLeft,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 15),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: const Radius.circular(12),
-            topLeft: const Radius.circular(12),
-            bottomRight: Radius.circular(!chat.isSendMessage? 12 : 0),
-            bottomLeft: Radius.circular(chat.isSendMessage? 12 : 0),
-          ),
-          color: chat.isSendMessage? context.theme.colorScheme.primaryContainer : context.theme.scaffoldBackgroundColor,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Chat message
-            Container(
-                constraints: const BoxConstraints(
-                    maxWidth: 200
-                ),
-                child: Text(chat.message)),
-            const W(20),
-            Text(chat.time,style: context.textTheme.bodySmall)
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // message
+          Container(
+            margin: const EdgeInsets.only(bottom: 15),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: const Radius.circular(12),
+                topLeft: const Radius.circular(12),
+                bottomRight: Radius.circular(!chat.isSendMessage? 12 : 0),
+                bottomLeft: Radius.circular(chat.isSendMessage? 12 : 0),
+              ),
+              color: chat.isSendMessage? context.theme.colorScheme.primaryContainer : context.theme.scaffoldBackgroundColor,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Chat message
+                Container(
+                    constraints: const BoxConstraints(
+                        maxWidth: 200
+                    ),
+                    child: Text(chat.message)),
+                const W(20),
+                Text(chat.time,style: context.textTheme.bodySmall)
 
-          ],
-        ),
+              ],
+            ),
+          ),
+          // avatar
+          if(!chat.isSendMessage)...[
+            const W(6),
+            Container(
+              width: 36,
+              height: 36,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle
+              ),
+              child: Image.network("https://dl.hitaldev.com/chat/avatars/pp.png",fit: BoxFit.cover),
+            ),
+          ]
+
+        ],
       ),
     );
   }
