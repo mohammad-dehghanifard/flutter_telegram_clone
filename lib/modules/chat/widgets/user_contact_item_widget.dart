@@ -29,7 +29,19 @@ class UserContactItem extends StatelessWidget {
           ),
           const W(10),
           // user name
-          Text('خانم زارع',style: context.textTheme.titleSmall)
+          Text('خانم زارع',style: context.textTheme.titleSmall),
+          if(isGroup)...[
+            const Spacer(),
+            // check box
+            Container(
+              width: 16,
+              height: 16,
+              decoration: BoxDecoration(
+                border: Border.all(color: context.theme.iconTheme.color!),
+                borderRadius: BorderRadius.circular(3)
+              ),
+            )
+          ]
         ],
       ),
     );
