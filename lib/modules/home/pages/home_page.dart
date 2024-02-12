@@ -22,7 +22,6 @@ class HomePage extends StatelessWidget {
               HomeTabBarWidget(),
               // chat list
               Expanded(child: HomeChatList()),
-
             ],
           ),
         ),

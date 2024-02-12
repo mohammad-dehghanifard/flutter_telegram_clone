@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/chat_page.dart';
+import 'package:get/get.dart';
 import 'home_chat_list_item.dart';
 
 class HomeChatList extends StatelessWidget {
@@ -10,7 +12,9 @@ class HomeChatList extends StatelessWidget {
       padding: const EdgeInsets.all(20),
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const HomeChatListItem();
+          return GestureDetector(
+            onTap: () => Get.to(const ChatPage()),
+              child: const HomeChatListItem());
         },);
   }
 }
