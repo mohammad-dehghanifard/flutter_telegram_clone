@@ -2,6 +2,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/home/pages/edit_profile.dart';
 import 'package:get/get.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -22,7 +23,7 @@ class DrawerWidget extends StatelessWidget {
         icon: FeatherIcons.users,
       ),
       _DrawerItem(
-        onTap: () {},
+        onTap: () => Get.to(const EditProfilePage()),
         title: 'ویرایش پروفایل',
         icon: FeatherIcons.edit3,
       ),
