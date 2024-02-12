@@ -15,13 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('fa'),
+      supportedLocales: const [
+        Locale('fa'),
       ],
       locale: const Locale('fa'),
       title: 'Telegram Clone',

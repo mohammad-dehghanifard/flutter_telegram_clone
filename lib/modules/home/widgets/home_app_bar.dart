@@ -12,7 +12,11 @@ class HomeAppBarWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(FeatherIcons.menu),
+          GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: const Icon(FeatherIcons.menu)),
           Image.asset(
             context.isDarkMode
                 ? "assets/images/lgoo_horiz_dark.png"

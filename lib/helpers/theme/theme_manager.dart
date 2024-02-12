@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ThemeManager{
   ThemeManager._();
@@ -46,6 +47,14 @@ class ThemeManager{
     titleMedium: TextStyle(fontSize: 16,fontWeight: FontWeight.w700),
     titleSmall: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
   );
+
+  static void changeTheme() {
+    if(Get.isDarkMode){
+      Get.changeTheme(light);
+    } else {
+      Get.changeTheme(dark);
+    }
+  }
 
 
 }
