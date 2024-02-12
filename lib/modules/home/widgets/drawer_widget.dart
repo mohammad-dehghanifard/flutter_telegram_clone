@@ -2,6 +2,8 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/select_group_member_page.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/send_new_message_page.dart';
 import 'package:flutter_telegram_clone/modules/home/pages/edit_profile.dart';
 import 'package:get/get.dart';
 
@@ -13,12 +15,12 @@ class DrawerWidget extends StatelessWidget {
 
     final List<_DrawerItem> items = [
       _DrawerItem(
-        onTap: () {},
+        onTap: () => Get.to(const SendNewMessagePage()),
         title: 'ایجاد پیام جدید',
         icon: FeatherIcons.user,
       ),
       _DrawerItem(
-        onTap: () {},
+        onTap: () => Get.to(const SelectGroupMemberPage()),
         title: 'ایجاد گروه جدید',
         icon: FeatherIcons.users,
       ),
