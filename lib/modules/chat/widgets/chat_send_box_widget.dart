@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
+import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class ChatSendBoxWidget extends StatelessWidget {
@@ -10,7 +11,6 @@ class ChatSendBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
-      height: 100,
       decoration: BoxDecoration(
         color: context.theme.scaffoldBackgroundColor,
         borderRadius: const BorderRadius.only(
@@ -18,15 +18,28 @@ class ChatSendBoxWidget extends StatelessWidget {
           topLeft: Radius.circular(24),
         ),
       ),
+      padding: const EdgeInsets.fromLTRB(12,15,12,20),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // send voice
           CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.mic),
+          const W(10),
           // send file
           CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.filePlus),
+          const W(10),
           // send message
           CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.send),
-
+          const W(20),
+          // text input
+          Expanded(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                isDense: true,
+                hintText: 'پیام خود را بنویسید ...'
+              ),
+            ),
+          )
         ],
       ),
     );

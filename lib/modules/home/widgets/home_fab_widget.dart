@@ -22,16 +22,18 @@ class HomeFabWidget extends StatelessWidget {
             HawkFabMenuItem(
               label: 'پیام جدید',
               ontap: () {},
-              labelColor: Colors.white,
+              labelColor: Colors.black,
+              color: const Color(0xFF702DFF),
               icon: const Icon(FeatherIcons.user),
-              labelBackgroundColor: context.theme.colorScheme.primaryContainer,
+              labelBackgroundColor: const Color(0xFFDAF2FF),
             ),
             HawkFabMenuItem(
               label: 'گروه جدید',
-              labelColor: Colors.white,
+              labelColor: Colors.black,
               ontap: () {},
-              icon: const Icon(FeatherIcons.user),
-              labelBackgroundColor: context.theme.colorScheme.primaryContainer,
+              icon: const Icon(FeatherIcons.users),
+              color: const Color(0xFF702DFF),
+              labelBackgroundColor: const Color(0xFFDAF2FF),
             ),
           ],
           body: Directionality(
