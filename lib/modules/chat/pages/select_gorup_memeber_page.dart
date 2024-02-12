@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/page_app_bar_widget.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/create_group_page.dart';
 import 'package:flutter_telegram_clone/modules/chat/widgets/user_contact_item_widget.dart';
+import 'package:get/get.dart';
 
 class SelectGroupMemberPage extends StatelessWidget {
   const SelectGroupMemberPage({super.key});
@@ -35,7 +37,7 @@ class SelectGroupMemberPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: ButtonWidget(
-                  onPress: () {},
+                  onPress: () => Get.to(const CreateGroupPage()),
                   text: 'ایجاد گروه'),
             )
           ],
