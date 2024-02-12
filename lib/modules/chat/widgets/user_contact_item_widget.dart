@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class UserContactItem extends StatelessWidget {
