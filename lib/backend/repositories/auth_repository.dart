@@ -21,8 +21,7 @@ class AuthRepository extends BaseRepository {
       showSnackBar(message: result.data['errors'][0], type: SnackBarType.error);
       return null;
     }
-    print(result);
-    showSnackBar(message: 'ثبت نام با موفقیت انجام شد!', type: SnackBarType.success);
+    showSnackBar(message: 'با موفقیت وارد شدید!', type: SnackBarType.success);
     return result.data['token'];
   }
 }
