@@ -13,7 +13,9 @@ class LoginController extends BaseController {
 
   Future<void> login() async {
     if(formKey.currentState!.validate()){
-
+        load();
+        await _repository.loginApi(request: request);
+        load();
     }
   }
 }

@@ -55,8 +55,8 @@ class LoginPage extends StatelessWidget {
                               const H(15),
                               // password
                               InputWidget(
-                                  controller: buildController.request.mobileController,
-                                  validator: buildController.request.mobileValidate,
+                                  controller: buildController.request.passwordController,
+                                  validator: buildController.request.passWordValidate,
                                   hintText: "رمز عبور",
                                   type: TextInputType.visiblePassword),
                               H(MediaQuery.sizeOf(context).height * 0.05),
