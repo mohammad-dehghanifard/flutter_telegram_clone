@@ -17,7 +17,7 @@ class LoginRequest {
 
   String? passWordValidate(String? value) {
     if(value == null || value.isEmpty){
-      return 'برای امنیت حساب خود، لطفا یک رمز عبور قوی وارد کنید';
+      return 'لطفا رمز عبور خود را وارد کنید!';
     } else if(value.length < 8) {
       return 'رمز عبور باید بیشتر از 8 حرف باشد!';
     }

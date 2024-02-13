@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/auth/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -37,17 +38,37 @@ class LoginPage extends StatelessWidget {
                       )
                   ),
                   child:  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // phone number
-                        const InputWidget(hintText: "شماره موبایل",icon: FeatherIcons.smartphone,type: TextInputType.phone),
-                        const H(15),
-                        // password
-                        const InputWidget(hintText: "رمز عبور",type: TextInputType.visiblePassword),
-                        H(MediaQuery.sizeOf(context).height * 0.05),
-                        // button
-                        ButtonWidget(onPress: () {}, text: "ثبت نام")
-                      ],
+                    child: GetBuilder<LoginController>(
+                      init: LoginController(),
+                      builder: (buildController) {
+                        return Form(
+                          key: buildController.formKey,
+                          child: Column(
+                            children: [
+                              // phone number
+                              InputWidget(
+                                  controller: buildController.request.mobileController,
+                                  validator: buildController.request.mobileValidate,
+                                  hintText: "شماره موبایل",
+                                  icon: FeatherIcons.smartphone,
+                                  type: TextInputType.phone),
+                              const H(15),
+                              // password
+                              InputWidget(
+                                  controller: buildController.request.mobileController,
+                                  validator: buildController.request.mobileValidate,
+                                  hintText: "رمز عبور",
+                                  type: TextInputType.visiblePassword),
+                              H(MediaQuery.sizeOf(context).height * 0.05),
+                              // button
+                              ButtonWidget(
+                                  onPress: buildController.login,
+                                  loading: buildController.loading,
+                                  text: "ثبت نام")
+                            ],
+                          ),
+                        );
+                      }
                     ),
                   ),
                 ),
