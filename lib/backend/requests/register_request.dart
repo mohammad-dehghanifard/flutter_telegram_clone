@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
 class RegisterRequest{
@@ -48,7 +49,18 @@ class RegisterRequest{
   }
   //endregion
 
-  void send() {}
+  FormData sendData() {
+    return FormData.fromMap(
+      {
+        'name' : nameController.text,
+        'mobile' : mobileController.text,
+        'password' : passwordController.text,
+        'passwordConfirm' : confirmPassController.text,
+        if(avatar != null)
+        'avatar' : MultipartFile.fromFileSync(avatar!.path,filename: avatar!.path.split('/').last)
+      }
+    );
+  }
 
 
 
