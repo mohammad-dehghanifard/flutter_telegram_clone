@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_telegram_clone/backend/repositories/auth_repository.dart';
 import 'package:flutter_telegram_clone/backend/requests/register_request.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
+import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
+import 'package:flutter_telegram_clone/modules/home/pages/home_page.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterController extends BaseController {
@@ -26,7 +29,11 @@ class RegisterController extends BaseController {
   Future<void> register() async {
       if(formKey.currentState!.validate()){
         load();
-        await _repository.registerApi(request: registerRequest);
+        final result = await _repository.registerApi(request: registerRequest);
+        if(result != null) {
+          await saveToken(result);
+          Get.offAll(const HomePage());
+        }
         load();
       }
   }
