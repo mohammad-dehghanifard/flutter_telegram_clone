@@ -14,7 +14,7 @@ class InputWidget extends StatefulWidget {
     this.maxLine,
     this.prefixIcon,
     this.isActive = true,
-    this.onChange
+    this.onChange, this.onTap
   });
 
   final TextEditingController? controller;
@@ -27,6 +27,7 @@ class InputWidget extends StatefulWidget {
   final String? Function(String? value)? validator;
   final bool isActive;
   final Function(String? value)? onChange;
+  final Function()? onTap;
 
   @override
   State<InputWidget> createState() => _InputWidgetState();
@@ -38,6 +39,7 @@ class _InputWidgetState extends State<InputWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: widget.onTap,
       readOnly: widget.isActive == false,
       obscureText: widget.type == TextInputType.visiblePassword ? _obscure : false,
       controller: widget.controller,

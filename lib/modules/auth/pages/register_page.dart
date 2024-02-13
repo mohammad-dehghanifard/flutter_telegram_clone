@@ -74,8 +74,19 @@ class RegisterPage extends StatelessWidget {
                                   hintText: "تکرار رمز عبور",
                                   type: TextInputType.visiblePassword),
                               const H(15),
-                              // set image
-                              const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
+                              // show image
+                                buildController.registerRequest.avatar == null
+                                    ? Container()
+                                    : SizedBox(
+                                        width: 45,
+                                        height: 45,
+                                ),
+                                    // set image
+                              InputWidget(
+                                  onTap: () => buildController.setAvatar(),
+                                  hintText: "انتخاب عکس پروفایل",
+                                  icon: FeatherIcons.image,
+                                  isActive: false),
                               H(MediaQuery.sizeOf(context).height * 0.05),
                               // button
                               ButtonWidget(onPress: buildController.register, text: "ثبت نام")
