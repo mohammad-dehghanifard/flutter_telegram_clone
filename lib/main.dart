@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
+import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
 import 'package:flutter_telegram_clone/modules/auth/pages/start_page.dart';
 import 'package:get/get.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(UserHelper());
   runApp(const MyApp());
 }
 
