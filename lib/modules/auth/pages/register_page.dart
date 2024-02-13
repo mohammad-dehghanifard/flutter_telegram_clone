@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/auth/controllers/register_controller.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -37,29 +38,44 @@ class RegisterPage extends StatelessWidget {
                     )
                   ),
                   child:  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // full name
-                        const InputWidget(
-
-                            hintText: "نام و نام خانوادگی",
-                            icon: FeatherIcons.user),
-                        const H(15),
-                        // phone number
-                        const InputWidget(hintText: "شماره موبایل",icon: FeatherIcons.smartphone,type: TextInputType.phone),
-                        const H(15),
-                        // password
-                        const InputWidget(hintText: "رمز عبور",type: TextInputType.visiblePassword),
-                        const H(15),
-                        // repeat password
-                        const InputWidget(hintText: "تکرار رمز عبور",type: TextInputType.visiblePassword),
-                        const H(15),
-                        // set image
-                        const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
-                        H(MediaQuery.sizeOf(context).height * 0.05),
-                        // button
-                        ButtonWidget(onPress: () {}, text: "ثبت نام")
-                      ],
+                    child: GetBuilder<RegisterController>(
+                      init: RegisterController(),
+                      builder: (buildController) {
+                        return Column(
+                          children: [
+                            // full name
+                             InputWidget(
+                                controller: buildController.registerRequest.nameController,
+                                hintText: "نام و نام خانوادگی",
+                                icon: FeatherIcons.user),
+                            const H(15),
+                            // phone number
+                            InputWidget(
+                                hintText: "شماره موبایل",
+                                icon: FeatherIcons.smartphone,
+                                controller: buildController.registerRequest.mobileController,
+                                type: TextInputType.phone),
+                            const H(15),
+                            // password
+                             InputWidget(
+                                controller: buildController.registerRequest.passwordController,
+                                hintText: "رمز عبور",
+                                type: TextInputType.visiblePassword),
+                            const H(15),
+                            // repeat password
+                            InputWidget(
+                                controller: buildController.registerRequest.confirmPassController,
+                                hintText: "تکرار رمز عبور",
+                                type: TextInputType.visiblePassword),
+                            const H(15),
+                            // set image
+                            const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
+                            H(MediaQuery.sizeOf(context).height * 0.05),
+                            // button
+                            ButtonWidget(onPress: () {}, text: "ثبت نام")
+                          ],
+                        );
+                      }
                     ),
                   ),
                 ),
