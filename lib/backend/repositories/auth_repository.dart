@@ -5,7 +5,7 @@ import 'package:flutter_telegram_clone/helpers/widget/show_snack_bar.dart';
 class AuthRepository extends BaseRepository {
   // Register Api
   Future<String?> registerApi({required RegisterRequest request}) async {
-    final result = await dio.post("/auth/register",data: request.sendData());
+    final result = await dio.post("/auth/register",data: request.data());
     if(result.statusCode != 200) {
       showSnackBar(message: result.data['errors'][0], type: SnackBarType.error);
       return null;
