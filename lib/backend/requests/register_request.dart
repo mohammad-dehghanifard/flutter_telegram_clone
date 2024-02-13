@@ -49,7 +49,7 @@ class RegisterRequest{
   }
   //endregion
 
-  FormData sendData() {
+  FormData sendData()  {
     return FormData.fromMap(
       {
         'name' : nameController.text,

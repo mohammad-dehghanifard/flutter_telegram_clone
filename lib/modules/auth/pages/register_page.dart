@@ -97,7 +97,10 @@ class RegisterPage extends StatelessWidget {
                                   isActive: false),
                               H(MediaQuery.sizeOf(context).height * 0.05),
                               // button
-                              ButtonWidget(onPress: buildController.register, text: "ثبت نام")
+                              ButtonWidget(
+                                  onPress: buildController.register,
+                                  loading: buildController.loading,
+                                  text: "ثبت نام")
                             ],
                           ),
                         );
