@@ -41,7 +41,7 @@ class RegisterRequest{
   String? confirmPassWordValidate(String? value) {
     if(value == null || value.isEmpty){
       return 'لطفا تکرار رمز عبور خود را وارد کنید';
-    } else if(value != confirmPassController.text) {
+    } else if(value != passwordController.text) {
       return 'تکرار رمز عبور با رمز عبور وارد شده مطابقت ندارد!';
     }
     return null;

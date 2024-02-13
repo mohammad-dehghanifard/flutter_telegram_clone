@@ -11,7 +11,9 @@ class RegisterController extends GetxController {
 //========================== methods ===========================================
 
   Future<void> register() async {
+      if(formKey.currentState!.validate()){
 
+      }
   }
 
 }

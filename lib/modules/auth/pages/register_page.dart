@@ -41,39 +41,46 @@ class RegisterPage extends StatelessWidget {
                     child: GetBuilder<RegisterController>(
                       init: RegisterController(),
                       builder: (buildController) {
-                        return Column(
-                          children: [
-                            // full name
-                             InputWidget(
-                                controller: buildController.registerRequest.nameController,
-                                hintText: "نام و نام خانوادگی",
-                                icon: FeatherIcons.user),
-                            const H(15),
-                            // phone number
-                            InputWidget(
-                                hintText: "شماره موبایل",
-                                icon: FeatherIcons.smartphone,
-                                controller: buildController.registerRequest.mobileController,
-                                type: TextInputType.phone),
-                            const H(15),
-                            // password
-                             InputWidget(
-                                controller: buildController.registerRequest.passwordController,
-                                hintText: "رمز عبور",
-                                type: TextInputType.visiblePassword),
-                            const H(15),
-                            // repeat password
-                            InputWidget(
-                                controller: buildController.registerRequest.confirmPassController,
-                                hintText: "تکرار رمز عبور",
-                                type: TextInputType.visiblePassword),
-                            const H(15),
-                            // set image
-                            const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
-                            H(MediaQuery.sizeOf(context).height * 0.05),
-                            // button
-                            ButtonWidget(onPress: () {}, text: "ثبت نام")
-                          ],
+                        return Form(
+                          key: buildController.formKey,
+                          child: Column(
+                            children: [
+                              // full name
+                               InputWidget(
+                                  controller: buildController.registerRequest.nameController,
+                                  validator: buildController.registerRequest.nameValidate,
+                                  hintText: "نام و نام خانوادگی",
+                                  icon: FeatherIcons.user),
+                              const H(15),
+                              // phone number
+                              InputWidget(
+                                  hintText: "شماره موبایل",
+                                  icon: FeatherIcons.smartphone,
+                                  validator: buildController.registerRequest.mobileValidate,
+                                  controller: buildController.registerRequest.mobileController,
+                                  type: TextInputType.phone),
+                              const H(15),
+                              // password
+                               InputWidget(
+                                  controller: buildController.registerRequest.passwordController,
+                                   validator: buildController.registerRequest.passWordValidate,
+                                  hintText: "رمز عبور",
+                                  type: TextInputType.visiblePassword),
+                              const H(15),
+                              // repeat password
+                              InputWidget(
+                                  controller: buildController.registerRequest.confirmPassController,
+                                  validator: buildController.registerRequest.confirmPassWordValidate,
+                                  hintText: "تکرار رمز عبور",
+                                  type: TextInputType.visiblePassword),
+                              const H(15),
+                              // set image
+                              const InputWidget(hintText: "انتخاب عکس پروفایل",icon: FeatherIcons.image,isActive: false),
+                              H(MediaQuery.sizeOf(context).height * 0.05),
+                              // button
+                              ButtonWidget(onPress: buildController.register, text: "ثبت نام")
+                            ],
+                          ),
                         );
                       }
                     ),

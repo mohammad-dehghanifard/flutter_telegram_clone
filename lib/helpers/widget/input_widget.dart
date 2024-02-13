@@ -73,6 +73,14 @@ class _InputWidgetState extends State<InputWidget> {
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none
         ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(width: 1,color: context.theme.colorScheme.error)
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(width: 1,color: context.theme.colorScheme.error)
+        ),
       ),
     );
   }
