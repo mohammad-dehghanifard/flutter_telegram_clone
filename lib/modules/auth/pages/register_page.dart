@@ -40,7 +40,10 @@ class RegisterPage extends StatelessWidget {
                     child: Column(
                       children: [
                         // full name
-                        const InputWidget(hintText: "نام و نام خانوادگی",icon: FeatherIcons.user),
+                        const InputWidget(
+
+                            hintText: "نام و نام خانوادگی",
+                            icon: FeatherIcons.user),
                         const H(15),
                         // phone number
                         const InputWidget(hintText: "شماره موبایل",icon: FeatherIcons.smartphone,type: TextInputType.phone),
