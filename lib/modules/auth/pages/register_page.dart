@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
@@ -29,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 32,vertical: 48),
+                  padding: const EdgeInsets.fromLTRB(32,32,48,4),
                   decoration: BoxDecoration(
                     color: context.theme.scaffoldBackgroundColor,
                     borderRadius: const BorderRadius.only(
@@ -45,6 +47,19 @@ class RegisterPage extends StatelessWidget {
                           key: buildController.formKey,
                           child: Column(
                             children: [
+                              // show user image
+                              buildController.registerRequest.avatar == null
+                                  ? const SizedBox()
+                                  : Padding(
+                                padding: const EdgeInsets.only(bottom: 15),
+                                child: SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(200),
+                                      child: Image.file(File(buildController.registerRequest.avatar!.path))),
+                                ),
+                              ),
                               // full name
                                InputWidget(
                                   controller: buildController.registerRequest.nameController,
@@ -74,14 +89,7 @@ class RegisterPage extends StatelessWidget {
                                   hintText: "تکرار رمز عبور",
                                   type: TextInputType.visiblePassword),
                               const H(15),
-                              // show image
-                                buildController.registerRequest.avatar == null
-                                    ? Container()
-                                    : SizedBox(
-                                        width: 45,
-                                        height: 45,
-                                ),
-                                    // set image
+                              // set image
                               InputWidget(
                                   onTap: () => buildController.setAvatar(),
                                   hintText: "انتخاب عکس پروفایل",
