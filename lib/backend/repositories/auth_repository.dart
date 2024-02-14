@@ -7,20 +7,14 @@ class AuthRepository extends BaseRepository {
   // Register Api
   Future<String?> registerApi({required RegisterRequest request}) async {
     final result = await dio.post("/auth/register",data: request.data());
-    if(result.statusCode != 200) {
-      showSnackBar(message: result.data['errors'][0], type: SnackBarType.error);
-      return null;
-    }
+    validateResponse(result);
     showSnackBar(message: 'ثبت نام با موفقیت انجام شد!', type: SnackBarType.success);
     return result.data['token'];
   }
   // Login Api
   Future<String?> loginApi({required LoginRequest request}) async {
     final result = await dio.post("/auth/login",data: request.data());
-    if(result.statusCode != 200) {
-      showSnackBar(message: result.data['errors'][0], type: SnackBarType.error);
-      return null;
-    }
+    validateResponse(result);
     showSnackBar(message: 'با موفقیت وارد شدید!', type: SnackBarType.success);
     return result.data['token'];
   }
