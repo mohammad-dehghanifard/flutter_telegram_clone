@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_telegram_clone/helpers/widget/button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/page_app_bar_widget.dart';
@@ -29,7 +30,7 @@ class SelectGroupMemberPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const UserContactItem(isGroup: true);
+                    return  UserContactItem(isGroup: true,contact: Contact(),);
                   },
                 )
             ),

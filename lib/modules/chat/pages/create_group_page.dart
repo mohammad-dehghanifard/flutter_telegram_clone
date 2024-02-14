@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/page_app_bar_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
@@ -59,7 +60,7 @@ class CreateGroupPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return const UserContactItem();
+                    return  UserContactItem(contact: Contact());
                   },
                 )
             ),
