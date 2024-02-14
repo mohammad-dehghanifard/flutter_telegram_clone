@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
 class HomeTabBarWidget extends StatelessWidget {
@@ -6,46 +7,38 @@ class HomeTabBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      width: MediaQuery.sizeOf(context).width,
-      height: 50,
-      child: Stack(
-        children: [
-          // divider
-          Positioned(
-            bottom: 1.5,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 1,
-              color: context.theme.dividerColor,
-            ),
-          ),
-          // items
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GetBuilder<HomeController>(
+      builder: (buildController) {
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          width: MediaQuery.sizeOf(context).width,
+          height: 50,
+          child: Stack(
             children: [
-              // all
-              TabBarItemWidget(
-                onTap: () {},
-                text: "همه پیام ها",
-                active: true,
+              // divider
+              Positioned(
+                bottom: 1.5,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 1,
+                  color: context.theme.dividerColor,
+                ),
               ),
-              // private
-              TabBarItemWidget(
-                onTap: () {},
-                text: "خصوصی",
+              // items
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(buildController.tabs.length, (index) => TabBarItemWidget(
+                  text: buildController.tabs[index],
+                  active: buildController.currentTab == index,
+                  onTap: () => buildController.changeTabBar(index),
+                )),
               ),
-              // group
-              TabBarItemWidget(
-                onTap: () {},
-                text: "گروه ها",
-              ),
-            ],
-          )
-      ],
-    ),
+
+          ],
+        ),
+        );
+      }
     );
   }
 }
@@ -59,22 +52,25 @@ class TabBarItemWidget extends StatelessWidget {
   final bool active;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(),
-        Text(text,style: context.textTheme.titleSmall),
-        const Spacer(),
-        // selected divider
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 400),
-          width: active? 74 : 0,
-          height: active? 4 : 0,
-          decoration: BoxDecoration(
-            color: active? context.theme.colorScheme.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(64)
-          ),
-        )
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(text,style: context.textTheme.titleSmall),
+          const Spacer(),
+          // selected divider
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: active? 74 : 0,
+            height: 4,
+            decoration: BoxDecoration(
+              color: context.theme.colorScheme.primary,
+              borderRadius: BorderRadius.circular(64)
+            ),
+          )
+        ],
+      ),
     );
   }
 }
