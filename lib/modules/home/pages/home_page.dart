@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:flutter_telegram_clone/modules/home/widgets/drawer_widget.dart';
@@ -23,7 +24,20 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       // app bar
-                      const HomeAppBarWidget(),
+                      HomeAppBarWidget(onSearchTab: () => buildController.changeSearchState()),
+                      // search bar
+                      AnimatedCrossFade(
+                          firstChild: Container(),
+                          secondChild:  Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: InputWidget(
+                                hintText: "جست و جو کنید....",
+                                controller: buildController.searchController,
+                                onChange: buildController.searchResult,
+                            ),
+                          ),
+                          crossFadeState: buildController.isSearch? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                          duration: const Duration(milliseconds: 300)),
                       // tab bar
                       const HomeTabBarWidget(),
                       // chat list

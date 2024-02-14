@@ -26,7 +26,7 @@ class InputWidget extends StatefulWidget {
   final int? maxLine;
   final String? Function(String? value)? validator;
   final bool isActive;
-  final Function(String? value)? onChange;
+  final Function(String value)? onChange;
   final Function()? onTap;
 
   @override

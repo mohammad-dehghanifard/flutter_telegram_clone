@@ -34,7 +34,6 @@ class HomeTabBarWidget extends StatelessWidget {
                   onTap: () => buildController.changeTabBar(index),
                 )),
               ),
-
           ],
         ),
         );
@@ -64,6 +63,7 @@ class TabBarItemWidget extends StatelessWidget {
             duration: const Duration(milliseconds: 200),
             width: active? 74 : 0,
             height: 4,
+            curve: Curves.bounceInOut,
             decoration: BoxDecoration(
               color: context.theme.colorScheme.primary,
               borderRadius: BorderRadius.circular(64)
