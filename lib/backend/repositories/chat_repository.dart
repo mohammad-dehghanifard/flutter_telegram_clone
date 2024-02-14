@@ -6,7 +6,6 @@ class ChatRepository extends BaseRepository {
   Future<User?> getUserInfoApi() async {
     final response = await dio.get('/auth/profile');
     validateResponse(response);
-    print(response);
-    return response.data['user'];
+    return User.fromJson(response.data['user']);
   }
 }

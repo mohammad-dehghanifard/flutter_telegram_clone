@@ -1,6 +1,8 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
+import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
+import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:flutter_telegram_clone/modules/chat/pages/select_group_member_page.dart';
 import 'package:flutter_telegram_clone/modules/chat/pages/send_new_message_page.dart';
@@ -41,40 +43,44 @@ class DrawerWidget extends StatelessWidget {
       surfaceTintColor: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            // change theme icon
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: ThemeManager.changeTheme,
-                  icon: Icon(context.isDarkMode? FeatherIcons.sun :FeatherIcons.moon)),
-            ),
-            // avatar and user name
-            Container(
-              width: 90,
-              height: 90,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle
-              ),
-              child: Image.network("https://dl.hitaldev.com/chat/avatars/pp-1.png",fit: BoxFit.cover),
-            ),
-            const H(8),
-            Text("آقای دهقان",style: context.textTheme.titleSmall),
-            H(MediaQuery.sizeOf(context).height * 0.04),
-            // items list
-            Expanded(
-                child: ListView.builder(
-                    itemCount: items.length,
-                    itemBuilder: (context, index) => _DrawerItem(
-                        title: items[index].title,
-                        onTap: items[index].onTap,
-                        icon: items[index].icon
-                    ),
+        child: GetBuilder<UserHelper>(
+          builder: (buildController) {
+            return Column(
+              children: [
+                // change theme icon
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                      onPressed: ThemeManager.changeTheme,
+                      icon: Icon(context.isDarkMode? FeatherIcons.sun :FeatherIcons.moon)),
+                ),
+                // avatar and user name
+                Container(
+                  width: 90,
+                  height: 90,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle
+                  ),
+                  child: LoadNetworkImage(imageUrl: buildController.user?.avatar ?? ""),
+                ),
+                const H(8),
+                Text(buildController.user?.name ?? "",style: context.textTheme.titleSmall),
+                H(MediaQuery.sizeOf(context).height * 0.04),
+                // items list
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) => _DrawerItem(
+                            title: items[index].title,
+                            onTap: items[index].onTap,
+                            icon: items[index].icon
+                        ),
+                    )
                 )
-            )
 
-          ],
+              ],
+            );
+          }
         ),
       ),
     );

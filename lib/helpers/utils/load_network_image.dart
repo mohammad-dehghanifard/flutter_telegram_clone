@@ -18,7 +18,7 @@ class LoadNetworkImage extends StatelessWidget {
         imageUrl: imageUrl,
         fit: BoxFit.cover,
         errorWidget: (context, url, error) {
-          return const Icon(Icons.image_not_supported,size: 48);
+          return Image.asset("assets/images/profile.png");
         },
       ),
     );
