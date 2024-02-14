@@ -14,32 +14,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(),
-      builder: (buildController) {
-        return  Scaffold(
-          drawer: const DrawerWidget(),
-          body: HomeFabWidget(
-            body: SafeArea(
-              child: Column(
-                children: [
-                  // app bar
-                  const HomeAppBarWidget(),
-                  // tab bar
-                  const HomeTabBarWidget(),
-                  // chat list
-                  Expanded(
-                      child: buildController.conversationList == null?
-                          const LoadingWidget()
-                          :HomeChatList(chats: buildController.conversationList!
-                      )),
-                ],
-              ),
-            ),
-          )
-        );
-      }
-    );
+        init: HomeController(),
+        builder: (buildController) {
+          return Scaffold(
+              drawer: const DrawerWidget(),
+              body: HomeFabWidget(
+                body: SafeArea(
+                  child: Column(
+                    children: [
+                      // app bar
+                      const HomeAppBarWidget(),
+                      // tab bar
+                      const HomeTabBarWidget(),
+                      // chat list
+                      Expanded(
+                          child: buildController.conversationList == null
+                              ? const LoadingWidget()
+                              : HomeChatList(chats: buildController.conversationList!)),
+                    ],
+                  ),
+                ),
+              ));
+        });
   }
 }
-
-

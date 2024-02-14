@@ -11,11 +11,12 @@ class HomeChatList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(20),
-        itemCount: 10,
+        itemCount: chats.length,
         itemBuilder: (context, index) {
+          final Conversation conversation = chats[index];
           return GestureDetector(
             onTap: () => Get.to(const ChatPage()),
-              child: const HomeChatListItem());
+              child: HomeChatListItem(conversation: conversation));
         },);
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/backend/models/conversation.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class HomeChatListItem extends StatelessWidget {
   const HomeChatListItem({
-    super.key,
+    super.key, required this.conversation,
   });
-
+  final Conversation conversation;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,15 +24,15 @@ class HomeChatListItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("خانم زارع",style: context.textTheme.titleSmall),
-              Text("ممنون از شما",style: context.textTheme.bodySmall)
+              Text(conversation.name ?? "",style: context.textTheme.titleSmall),
+              Text(conversation.lastMessage?.text ?? "",style: context.textTheme.bodySmall)
             ],
           ),
           const Spacer(),
           // message time and count
           Column(
             children: [
-              Text("13:02",style: context.textTheme.bodySmall),
+              Text(conversation.lastMessage?.date ?? "",style: context.textTheme.bodySmall),
               const H(8),
               Container(
                 width: 20,
@@ -40,7 +41,7 @@ class HomeChatListItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: context.theme.colorScheme.primary
                 ),
-                child: Center(child: Text("2",style: context.textTheme.bodySmall!.apply(color: Colors.white))),
+                child: Center(child: Text(conversation.lastMessage?.conversationId.toString() ?? "",style: context.textTheme.bodySmall!.apply(color: Colors.white))),
               )
             ],
           )
