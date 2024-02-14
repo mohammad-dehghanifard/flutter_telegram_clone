@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:flutter_telegram_clone/modules/home/widgets/drawer_widget.dart';
 import 'package:flutter_telegram_clone/modules/home/widgets/home_app_bar.dart';
@@ -15,18 +16,22 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (buildController) {
-        return const Scaffold(
-          drawer: DrawerWidget(),
+        return  Scaffold(
+          drawer: const DrawerWidget(),
           body: HomeFabWidget(
             body: SafeArea(
               child: Column(
                 children: [
                   // app bar
-                  HomeAppBarWidget(),
+                  const HomeAppBarWidget(),
                   // tab bar
-                  HomeTabBarWidget(),
+                  const HomeTabBarWidget(),
                   // chat list
-                  Expanded(child: HomeChatList()),
+                  Expanded(
+                      child: buildController.conversationList == null?
+                          const LoadingWidget()
+                          :HomeChatList(chats: buildController.conversationList!
+                      )),
                 ],
               ),
             ),
@@ -36,3 +41,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
