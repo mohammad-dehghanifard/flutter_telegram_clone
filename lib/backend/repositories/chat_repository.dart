@@ -16,4 +16,10 @@ class ChatRepository extends BaseRepository {
     validateResponse(response);
     return ConversationResponse.fromJson(response.data).data ?? [];
   }
+  // Get all User by Contacts
+  Future<List<User>> getAllUserByContactsApi({required List<String> mobiles}) async {
+    final response = await dio.post("/contacts",data: {'mobiles':mobiles});
+    validateResponse(response);
+    return response.data['data'] ?? [];
+  }
 }
