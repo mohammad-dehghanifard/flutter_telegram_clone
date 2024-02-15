@@ -2,6 +2,7 @@ import 'package:flutter_telegram_clone/backend/models/conversation.dart';
 import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/backend/repositories/base_repository.dart';
 import 'package:flutter_telegram_clone/backend/response/conversation_response.dart';
+import 'package:flutter_telegram_clone/backend/response/user_response.dart';
 
 class ChatRepository extends BaseRepository {
   // Get user Info Api
@@ -18,8 +19,8 @@ class ChatRepository extends BaseRepository {
   }
   // Get all User by Contacts
   Future<List<User>> getAllUserByContactsApi({required List<String> mobiles}) async {
-    final response = await dio.post("/contacts",data: {'mobiles':mobiles});
+    final response = await dio.post('/contacts',data: {'mobiles':mobiles});
     validateResponse(response);
-    return response.data['data'] ?? [];
+    return UserResponse.fromJson(response.data).data ?? [];
   }
 }

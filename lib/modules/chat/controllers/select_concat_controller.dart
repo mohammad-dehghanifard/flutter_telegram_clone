@@ -13,7 +13,6 @@ class SelectedConcatController extends BaseController {
     if (await FlutterContacts.requestPermission()) {
       contacts = await FlutterContacts.getContacts(withProperties: true);
       final mobiles = contacts?.map((e) => e.phones.first.number).toList();
-      print(mobiles);
       final result = await _repository.getAllUserByContactsApi(mobiles: mobiles ?? []);
       users = result;
       update();
