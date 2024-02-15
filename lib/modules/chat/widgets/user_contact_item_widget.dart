@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/contact.dart';
+import 'package:flutter_telegram_clone/backend/models/user.dart';
+import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class UserContactItem extends StatelessWidget {
   const UserContactItem({
     this.isGroup = false,
-    super.key, required this.contact,
+    super.key, required this.user,
   });
   final bool isGroup;
-  final Contact contact;
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,11 +28,11 @@ class UserContactItem extends StatelessWidget {
             decoration: const BoxDecoration(
                 shape: BoxShape.circle
             ),
-            child: Image.network("https://dl.hitaldev.com/chat/avatars/pp.png",fit: BoxFit.cover),
+            child: LoadNetworkImage(imageUrl: user.avatar ?? ""),
           ),
           const W(10),
           // user name
-          Text(contact.name.first,style: context.textTheme.titleSmall),
+          Text(user.name ?? "",style: context.textTheme.titleSmall),
           if(isGroup)...[
             const Spacer(),
             // check box

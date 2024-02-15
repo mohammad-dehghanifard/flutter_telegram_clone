@@ -1,6 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/helpers/widget/input_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/select_concat_controller.dart';
@@ -31,8 +31,8 @@ class SelectContactWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                     itemCount: buildController.users?.length,
                     itemBuilder: (context, index) {
-                      final Contact contact = buildController.contacts![index];
-                      return UserContactItem(contact: contact,isGroup: isMultiple);
+                      final User user = buildController.users![index];
+                      return UserContactItem(user: user,isGroup: isMultiple);
                     },
                   )
               ),
