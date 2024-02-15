@@ -28,9 +28,9 @@ class SendNewMessagePage extends StatelessWidget {
                   child: InputWidget(hintText: "جستجو کنید ...",icon: FeatherIcons.search,),
                 ),
                 Expanded(
-                    child: buildController.contacts == null ? const LoadingWidget() : ListView.builder(
+                    child: buildController.users == null ? const LoadingWidget() : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                        itemCount: buildController.contacts?.length,
+                        itemCount: buildController.users?.length,
                         itemBuilder: (context, index) {
                         final Contact contact = buildController.contacts![index];
                           return UserContactItem(contact: contact);
