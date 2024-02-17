@@ -25,7 +25,9 @@ class ChatPage extends StatelessWidget {
                  ChatAppBarWidget(title: conversation.name ?? "",avatar: conversation.image ?? ""),
                   buildController.messages == null
                       ? const Center(child: LoadingWidget())
-                      :  ChatListWidget(messages: buildController.messages ?? []),
+                      :  ChatListWidget(
+                      scrollController: buildController.scrollController,
+                      messages: buildController.messages ?? []),
                 ],
             ),
           ),

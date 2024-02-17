@@ -3,6 +3,7 @@ import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/helpers/utils/constants.dart';
 import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/chat_controller.dart';
+import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -29,10 +30,11 @@ class SocketController extends BaseController {
 
  void listenToMessage() {
   socket.on("receiveMessage", (data) {
+   final Message message = Message.fromJson(data["message"]);
       if (Get.isRegistered<ChatController>()) {
-        final Message message = Message.fromJson(data["message"]);
         Get.find<ChatController>().addMessageToList(message);
       }
+      Get.find<HomeController>().updateConversation(message);
     });
   }
 
