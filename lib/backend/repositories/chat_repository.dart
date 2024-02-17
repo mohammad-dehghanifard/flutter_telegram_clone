@@ -1,7 +1,9 @@
 import 'package:flutter_telegram_clone/backend/models/conversation.dart';
+import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/backend/repositories/base_repository.dart';
 import 'package:flutter_telegram_clone/backend/response/conversation_response.dart';
+import 'package:flutter_telegram_clone/backend/response/message_response.dart';
 import 'package:flutter_telegram_clone/backend/response/user_response.dart';
 
 class ChatRepository extends BaseRepository {
@@ -22,5 +24,11 @@ class ChatRepository extends BaseRepository {
     final response = await dio.post('/contacts',data: {'mobiles':mobiles});
     validateResponse(response);
     return UserResponse.fromJson(response.data).data ?? [];
+  }
+  // Get conversation all message
+  Future<List<Message>> getAllMessageApi({required int id}) async {
+    final response = await dio.get("/conversation/$id/messages");
+    validateResponse(response);
+    return MessageResponse.fromJson(response.data).data ?? [];
   }
 }
