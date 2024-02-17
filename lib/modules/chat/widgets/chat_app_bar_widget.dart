@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class ChatAppBarWidget extends StatelessWidget {
-  const ChatAppBarWidget({super.key});
-
+  const ChatAppBarWidget({super.key, required this.title, required this.avatar});
+  final String title;
+  final String avatar;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,11 +22,11 @@ class ChatAppBarWidget extends StatelessWidget {
             decoration: const BoxDecoration(
                 shape: BoxShape.circle
             ),
-            child: Image.network("https://dl.hitaldev.com/chat/avatars/pp.png",fit: BoxFit.cover),
+            child: LoadNetworkImage(imageUrl: avatar),
           ),
           const W(10),
           // user name
-          Text("خانم زارع",style: context.textTheme.titleMedium),
+          Text(title,style: context.textTheme.titleMedium),
           const Spacer(),
           const Directionality(
               textDirection: TextDirection.ltr,
