@@ -61,11 +61,15 @@ class HomeController extends BaseController {
   }
   // update conversation
   void updateConversation(Message message){
-    final conversation = allConversationList?.firstWhere((element) => element.id == message.conversationId!);
+    final conversation = allConversationList?.firstWhereOrNull((element) => element.id == message.conversationId!);
     if(conversation != null) {
       conversation.lastMessage = message;
-      conversation.unreadCount = conversation.unreadCount! + 1;
+      if(message.senderId != userHelper.user?.id!){
+        conversation.unreadCount = conversation.unreadCount! + 1;
+      }
       update();
+    } else {
+      fetchConversation();
     }
   }
 //======================= life cycle ===========================================
