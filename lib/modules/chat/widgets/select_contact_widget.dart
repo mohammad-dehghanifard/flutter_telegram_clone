@@ -11,9 +11,11 @@ import 'user_contact_item_widget.dart';
 class SelectContactWidget extends StatelessWidget {
   const SelectContactWidget({
     this.isMultiple = false,
+    this.onSelect,
     super.key,
   });
   final bool isMultiple;
+  final Function(User user)? onSelect;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SelectedConcatController>(
@@ -32,7 +34,13 @@ class SelectContactWidget extends StatelessWidget {
                     itemCount: buildController.users?.length,
                     itemBuilder: (context, index) {
                       final User user = buildController.users![index];
-                      return UserContactItem(user: user,isGroup: isMultiple);
+                      return GestureDetector(
+                          onTap: () {
+                            if(onSelect != null){
+                              onSelect!(user);
+                            }
+                          },
+                          child: UserContactItem(user: user,isGroup: isMultiple));
                     },
                   )
               ),
