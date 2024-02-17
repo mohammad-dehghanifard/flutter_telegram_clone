@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/backend/models/conversation.dart';
+import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,10 @@ class HomeChatListItem extends StatelessWidget {
       child: Row(
         children: [
           // user avatar
-          const CircleAvatar(),
+          SizedBox(
+            width: 48,
+              height: 48,
+              child: LoadNetworkImage(imageUrl: conversation.image ?? "")),
           const W(12),
           // user name and last message
           Column(
@@ -34,6 +38,7 @@ class HomeChatListItem extends StatelessWidget {
             children: [
               Text(conversation.lastMessage?.date ?? "",style: context.textTheme.bodySmall),
               const H(8),
+              if(conversation.unreadCount! > 0)
               Container(
                 width: 20,
                 height: 20,
@@ -41,7 +46,7 @@ class HomeChatListItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: context.theme.colorScheme.primary
                 ),
-                child: Center(child: Text(conversation.lastMessage?.conversationId.toString() ?? "",style: context.textTheme.bodySmall!.apply(color: Colors.white))),
+                child: Center(child: Text(conversation.unreadCount.toString() ?? "",style: context.textTheme.bodySmall!.apply(color: Colors.white))),
               )
             ],
           )
