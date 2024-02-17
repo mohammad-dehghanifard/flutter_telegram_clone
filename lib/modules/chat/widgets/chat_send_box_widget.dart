@@ -2,6 +2,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/chat_controller.dart';
 import 'package:get/get.dart';
 
 class ChatSendBoxWidget extends StatelessWidget {
@@ -33,11 +34,12 @@ class ChatSendBoxWidget extends StatelessWidget {
             CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.filePlus),
             const W(10),
             // send message
-            CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.send),
+            CircleIconButtonWidget(onTap: () => Get.find<ChatController>().sendMessage(),icon: FeatherIcons.send),
             const W(20),
             // text input
             Expanded(
               child: TextFormField(
+                controller: Get.find<ChatController>().textController,
                 decoration: const InputDecoration(
                   isDense: true,
                   hintText: 'پیام خود را بنویسید ...'

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/backend/repositories/chat_repository.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
@@ -10,6 +11,7 @@ class ChatController extends BaseController {
 
 //============================ variables =======================================
   final ChatRepository _repository = ChatRepository();
+  final TextEditingController textController = TextEditingController();
   List<Message>? messages;
 
 //============================ methods =========================================
@@ -18,6 +20,20 @@ class ChatController extends BaseController {
     messages = result;
     update();
   }
+
+  void sendMessage() {
+    if(textController.text.isNotEmpty){
+      Get.find<SocketController>().sendMessage(conversationId: id, text: textController.text);
+      textController.clear();
+      Get.focusScope?.unfocus();
+    }
+  }
+
+  void addMessageToList(Message message) {
+    messages?.add(message);
+    update();
+  }
+
 
 //============================ life cycle ======================================
   @override
