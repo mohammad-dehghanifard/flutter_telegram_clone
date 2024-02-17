@@ -9,38 +9,43 @@ class ChatSendBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(
-        color: context.theme.scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(24),
-          topLeft: Radius.circular(24),
-        ),
+    return Padding(
+      padding:  EdgeInsets.only(
+        bottom: MediaQuery.viewInsetsOf(context).bottom
       ),
-      padding: const EdgeInsets.fromLTRB(12,15,12,20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // send voice
-          CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.mic),
-          const W(10),
-          // send file
-          CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.filePlus),
-          const W(10),
-          // send message
-          CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.send),
-          const W(20),
-          // text input
-          Expanded(
-            child: TextFormField(
-              decoration: const InputDecoration(
-                isDense: true,
-                hintText: 'پیام خود را بنویسید ...'
+      child: Container(
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          color: context.theme.scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(24),
+            topLeft: Radius.circular(24),
+          ),
+        ),
+        padding: const EdgeInsets.fromLTRB(12,15,12,20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // send voice
+            CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.mic),
+            const W(10),
+            // send file
+            CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.filePlus),
+            const W(10),
+            // send message
+            CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.send),
+            const W(20),
+            // text input
+            Expanded(
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  isDense: true,
+                  hintText: 'پیام خود را بنویسید ...'
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@ class HomeChatList extends StatelessWidget {
         itemBuilder: (context, index) {
           final Conversation conversation = chats[index];
           return GestureDetector(
-            onTap: () => Get.to(const ChatPage()),
+            onTap: () => Get.to( ChatPage(conversation: conversation,isGroup: conversation.type == "Group")),
               child: HomeChatListItem(conversation: conversation));
         },);
   }

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/backend/models/message.dart';
+import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
+import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
-import 'chat_list_widget.dart';
 
 class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget({
     super.key,
-    required this.chat,
+    required this.message,
   });
 
-  final ChatMessage chat;
+  final Message message;
+  bool get isSendMessage => message.senderId == userHelper.user!.id!;
 
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: chat.isSendMessage? Alignment.centerRight :Alignment.centerLeft,
+      alignment: isSendMessage? Alignment.centerRight :Alignment.centerLeft,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -26,10 +29,10 @@ class ChatMessageWidget extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 topRight: const Radius.circular(12),
                 topLeft: const Radius.circular(12),
-                bottomRight: Radius.circular(!chat.isSendMessage? 12 : 0),
-                bottomLeft: Radius.circular(chat.isSendMessage? 12 : 0),
+                bottomRight: Radius.circular(!isSendMessage? 12 : 0),
+                bottomLeft: Radius.circular(isSendMessage? 12 : 0),
               ),
-              color: chat.isSendMessage? context.theme.colorScheme.primaryContainer : context.theme.scaffoldBackgroundColor,
+              color: isSendMessage? context.theme.colorScheme.primaryContainer : context.theme.scaffoldBackgroundColor,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -39,15 +42,15 @@ class ChatMessageWidget extends StatelessWidget {
                     constraints: const BoxConstraints(
                         maxWidth: 200
                     ),
-                    child: Text(chat.message)),
+                    child: Text(message.text ?? "")),
                 const W(20),
-                Text(chat.time,style: context.textTheme.bodySmall)
+                Text(message.date ?? "",style: context.textTheme.bodySmall)
 
               ],
             ),
           ),
           // avatar
-          if(!chat.isSendMessage)...[
+          if(!isSendMessage)...[
             const W(6),
             Container(
               width: 36,
@@ -55,7 +58,7 @@ class ChatMessageWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle
               ),
-              child: Image.network("https://dl.hitaldev.com/chat/avatars/pp.png",fit: BoxFit.cover),
+              child: LoadNetworkImage(imageUrl: message.senderAvatar ?? ""),
             ),
           ]
 
