@@ -37,6 +37,7 @@ class ChatRepository extends BaseRepository {
     final data = await request.data();
     final response = await dio.post("/create/conversation",data: data);
     validateResponse(response);
+    print(response);
     return Conversation.fromJson(response.data["conversation"]);
   }
 }
