@@ -1,6 +1,8 @@
 import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/backend/repositories/chat_repository.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
+import 'package:get/get.dart';
 
 class ChatController extends BaseController {
   ChatController(this.id);
@@ -20,6 +22,7 @@ class ChatController extends BaseController {
 //============================ life cycle ======================================
   @override
   void onInit() {
+    Get.find<SocketController>().joinConversation(id);
     getAllMessage();
     super.onInit();
   }

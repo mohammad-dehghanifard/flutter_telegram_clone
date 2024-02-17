@@ -3,6 +3,8 @@ import 'package:flutter_telegram_clone/backend/models/conversation.dart';
 import 'package:flutter_telegram_clone/backend/repositories/chat_repository.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
+import 'package:get/get.dart';
 
 class HomeController extends BaseController {
 //====================== variable ==============================================
@@ -57,6 +59,7 @@ class HomeController extends BaseController {
   void onInit() {
     _fetchConversation();
     _fetchUserInfo();
+    Get.put(SocketController());
     super.onInit();
   }
 }

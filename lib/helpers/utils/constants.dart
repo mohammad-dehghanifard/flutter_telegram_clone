@@ -1,0 +1,1 @@
+const socketUrl = "https://chat.hitaldev.ir";
