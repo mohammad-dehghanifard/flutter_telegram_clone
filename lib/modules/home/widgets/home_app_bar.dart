@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/modules/chat/pages/chat_page.dart';
 import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,8 @@ class HomeAppBarWidget extends StatelessWidget {
         children: [
           GestureDetector(
               onTap: () {
-                Scaffold.of(context).openDrawer();
+                //Scaffold.of(context).openDrawer();
+                Get.to(const ChatPage());
               },
               child: const Icon(FeatherIcons.menu)),
           Image.asset(
