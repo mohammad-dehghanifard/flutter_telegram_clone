@@ -1,6 +1,5 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_telegram_clone/modules/chat/pages/select_group_member_page.dart';
 import 'package:flutter_telegram_clone/modules/chat/pages/send_new_message_page.dart';
 import 'package:get/get.dart';
 import 'package:hawk_fab_menu/hawk_fab_menu.dart';
@@ -23,7 +22,7 @@ class HomeFabWidget extends StatelessWidget {
           items: [
             HawkFabMenuItem(
               label: 'پیام جدید',
-              ontap: () => Get.to(const SendNewMessagePage()),
+              ontap: () => Get.to(const SendNewMessagePage(title: "پیام جدید",group: false)),
               labelColor: Colors.black,
               color: const Color(0xFF702DFF),
               icon: const Icon(FeatherIcons.user),
@@ -32,7 +31,7 @@ class HomeFabWidget extends StatelessWidget {
             HawkFabMenuItem(
               label: 'گروه جدید',
               labelColor: Colors.black,
-              ontap: () => Get.to(const SelectGroupMemberPage()),
+              ontap: () => Get.to(const SendNewMessagePage(title: "اعضای گروه را انتخاب کنید",group: true)),
               icon: const Icon(FeatherIcons.users),
               color: const Color(0xFF702DFF),
               labelBackgroundColor: const Color(0xFFDAF2FF),

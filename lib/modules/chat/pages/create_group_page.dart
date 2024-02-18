@@ -8,8 +8,8 @@ import 'package:flutter_telegram_clone/modules/chat/widgets/user_contact_item_wi
 import 'package:get/get.dart';
 
 class CreateGroupPage extends StatelessWidget {
-  const CreateGroupPage({super.key});
-
+  const CreateGroupPage({super.key, required this.users});
+  final List<User> users;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

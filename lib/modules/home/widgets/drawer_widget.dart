@@ -4,7 +4,6 @@ import 'package:flutter_telegram_clone/helpers/theme/theme_manager.dart';
 import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
-import 'package:flutter_telegram_clone/modules/chat/pages/select_group_member_page.dart';
 import 'package:flutter_telegram_clone/modules/chat/pages/send_new_message_page.dart';
 import 'package:flutter_telegram_clone/modules/home/pages/edit_profile.dart';
 import 'package:get/get.dart';
@@ -17,12 +16,12 @@ class DrawerWidget extends StatelessWidget {
 
     final List<_DrawerItem> items = [
       _DrawerItem(
-        onTap: () => Get.to(const SendNewMessagePage()),
+        onTap: () => Get.to(const SendNewMessagePage(title: "پیام جدید",group: false)),
         title: 'ایجاد پیام جدید',
         icon: FeatherIcons.user,
       ),
       _DrawerItem(
-        onTap: () => Get.to(const SelectGroupMemberPage()),
+        onTap: () => Get.to(const SendNewMessagePage(title: "اعضای گروه را انتخاب کنید",group: true)),
         title: 'ایجاد گروه جدید',
         icon: FeatherIcons.users,
       ),
