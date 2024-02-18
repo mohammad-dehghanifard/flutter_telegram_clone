@@ -22,7 +22,7 @@ class ChatPage extends StatelessWidget {
           body:  SafeArea(
             child: Column(
               children: [
-                 ChatAppBarWidget(title: conversation.name ?? "",avatar: conversation.image ?? ""),
+                 ChatAppBarWidget(title: conversation.name ?? "",avatar: conversation.image ?? "",typing: buildController.isTyping),
                   buildController.messages == null
                       ? const Center(child: LoadingWidget())
                       :  ChatListWidget(

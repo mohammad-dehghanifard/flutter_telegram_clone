@@ -4,9 +4,10 @@ import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
 
 class ChatAppBarWidget extends StatelessWidget {
-  const ChatAppBarWidget({super.key, required this.title, required this.avatar});
+  const ChatAppBarWidget({super.key, required this.title, required this.avatar,this.typing = false});
   final String title;
   final String avatar;
+  final bool typing;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +28,10 @@ class ChatAppBarWidget extends StatelessWidget {
           const W(10),
           // user name
           Text(title,style: context.textTheme.titleMedium),
+          const W(12),
+          Visibility(
+              visible: typing,
+              child: Text("در حال نوشتن...",style: context.textTheme.bodySmall)),
           const Spacer(),
           const Directionality(
               textDirection: TextDirection.ltr,

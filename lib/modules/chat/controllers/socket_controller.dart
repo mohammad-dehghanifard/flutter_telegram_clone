@@ -45,6 +45,20 @@ class SocketController extends BaseController {
       "conversationId" : id
     });
   }
+
+  void startTyping(int id) {
+    socket.emit("startTyping",{
+      "userId" : userHelper.user?.id!,
+      "conversationId" : id
+    });
+  }
+
+  void stopTyping(int id) {
+    socket.emit("stopTyping",{
+      "userId" : userHelper.user?.id!,
+      "conversationId" : id
+    });
+  }
   
   void listenToSeenMessage() {
     socket.on("seenMessage", (data) {
@@ -56,12 +70,31 @@ class SocketController extends BaseController {
     });
   }
 
+  void listenToTyping() {
+    socket.on("userTyping", (data) {
+      if(Get.isRegistered<ChatController>()){
+        if(Get.find<ChatController>().id == data['conversationId']){
+          Get.find<ChatController>().toggleTyping();
+        }
+      }
+    });
+
+    socket.on("userStoppedTyping", (data) {
+      if(Get.isRegistered<ChatController>()){
+        if(Get.find<ChatController>().id == data['conversationId']){
+          Get.find<ChatController>().toggleTyping();
+        }
+      }
+    });
+  }
+
 //======================== life cycle ==========================================
   @override
   void onInit() {
     _initSocket();
     listenToMessage();
     listenToSeenMessage();
+    listenToTyping();
     super.onInit();
   }
 }

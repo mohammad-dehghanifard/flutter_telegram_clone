@@ -15,6 +15,8 @@ class ChatController extends BaseController {
   final TextEditingController textController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   List<Message>? messages;
+  bool isTyping = false;
+  bool isUserTyping = false;
 
 //============================ methods =========================================
   Future<void> getAllMessage() async {
@@ -49,6 +51,24 @@ class ChatController extends BaseController {
       element.isSeen = true;
     });
     update();
+  }
+
+  void toggleTyping() {
+    isTyping = !isTyping;
+    update();
+  }
+
+  void checkUserTyping() {
+    if(!isUserTyping){
+      isUserTyping = true;
+      update();
+      Get.find<SocketController>().startTyping(id);
+      Future.delayed(const Duration(seconds: 4)).then((value) {
+        isUserTyping = false;
+        Get.find<SocketController>().stopTyping(id);
+        update();
+      });
+    }
   }
 
 //============================ life cycle ======================================
