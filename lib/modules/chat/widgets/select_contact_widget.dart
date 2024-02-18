@@ -36,11 +36,19 @@ class SelectContactWidget extends StatelessWidget {
                       final User user = buildController.users![index];
                       return GestureDetector(
                           onTap: () {
-                            if(onSelect != null){
-                              onSelect!(user);
+                            if(!isMultiple){
+                              if(onSelect != null){
+                                onSelect!(user);
+                              }
+                            } else {
+                              buildController.addNewUserForGroup(user);
                             }
                           },
-                          child: UserContactItem(user: user,isGroup: isMultiple));
+                          child: UserContactItem(
+                            user: user,
+                            isGroup: isMultiple,
+                            selected: buildController.selectedUser.where((u) => u.id == user.id).isNotEmpty,
+                          ));
                     },
                   )
               ),

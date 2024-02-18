@@ -8,6 +8,7 @@ class SelectedConcatController extends BaseController {
   final ChatRepository _repository = ChatRepository();
   List<Contact>? contacts;
   List<User>? users;
+  List<User> selectedUser = []; // for create group
 //================================ methods =====================================
   Future<void> getContacts() async {
     if (await FlutterContacts.requestPermission()) {
@@ -17,6 +18,17 @@ class SelectedConcatController extends BaseController {
       users = result;
       update();
     }
+  }
+
+  void addNewUserForGroup(User user){
+    if(!selectedUser.contains(user)){
+      selectedUser.add(user);
+      update();
+    } else {
+      selectedUser.removeWhere((u) => u.id == user.id);
+      update();
+    }
+
   }
 //================================ life cycle ==================================
   @override

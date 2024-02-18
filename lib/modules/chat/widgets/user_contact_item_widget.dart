@@ -7,9 +7,12 @@ import 'package:get/get.dart';
 class UserContactItem extends StatelessWidget {
   const UserContactItem({
     this.isGroup = false,
-    super.key, required this.user,
+    super.key,
+    required this.user,
+    this.selected = false,
   });
   final bool isGroup;
+  final bool selected;
   final User user;
   @override
   Widget build(BuildContext context) {
@@ -36,13 +39,16 @@ class UserContactItem extends StatelessWidget {
           if(isGroup)...[
             const Spacer(),
             // check box
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 400),
               width: 16,
               height: 16,
               decoration: BoxDecoration(
+                color: selected? context.iconColor : Colors.transparent,
                 border: Border.all(color: context.theme.iconTheme.color!),
                 borderRadius: BorderRadius.circular(3)
               ),
+              child: Icon(Icons.check,size: 14,color: context.theme.scaffoldBackgroundColor),
             )
           ]
         ],
