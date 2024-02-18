@@ -29,7 +29,8 @@ class HomeChatListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(conversation.name ?? "",style: context.textTheme.titleSmall),
-              Text(conversation.lastMessage?.text ?? "",style: context.textTheme.bodySmall)
+              Text(conversation.type == "GROUP"? "${conversation.lastMessage?.senderName} : ${conversation.lastMessage?.text}"
+                  :conversation.lastMessage?.text ?? "",style: context.textTheme.bodySmall)
             ],
           ),
           const Spacer(),
@@ -46,7 +47,7 @@ class HomeChatListItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: context.theme.colorScheme.primary
                 ),
-                child: Center(child: Text(conversation.unreadCount.toString() ?? "",style: context.textTheme.bodySmall!.apply(color: Colors.white))),
+                child: Center(child: Text(conversation.unreadCount.toString(),style: context.textTheme.bodySmall!.apply(color: Colors.white))),
               )
             ],
           )
