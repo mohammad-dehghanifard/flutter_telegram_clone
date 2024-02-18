@@ -33,8 +33,26 @@ class SocketController extends BaseController {
    final Message message = Message.fromJson(data["message"]);
       if (Get.isRegistered<ChatController>()) {
         Get.find<ChatController>().addMessageToList(message);
+        seenMessage(message.conversationId!);
       }
       Get.find<HomeController>().updateConversation(message);
+    });
+  }
+
+  void seenMessage(int id) {
+    socket.emit("seenMessages",{
+      "userId" : userHelper.user?.id!,
+      "conversationId" : id
+    });
+  }
+  
+  void listenToSeenMessage() {
+    socket.on("seenMessage", (data) {
+      if(Get.isRegistered<ChatController>()){
+        if(Get.find<ChatController>().id == data['conversationId']){
+          Get.find<ChatController>().updateSeenMessage();
+        }
+      }
     });
   }
 
@@ -43,6 +61,7 @@ class SocketController extends BaseController {
   void onInit() {
     _initSocket();
     listenToMessage();
+    listenToSeenMessage();
     super.onInit();
   }
 }

@@ -20,6 +20,7 @@ class ChatController extends BaseController {
   Future<void> getAllMessage() async {
     final result = await _repository.getAllMessageApi(id: id);
     Get.find<HomeController>().fetchConversation();
+    Get.find<SocketController>().seenMessage(id);
     messages = result;
     Future.delayed(const Duration(milliseconds: 50)).then((_) => scrollDown());
     update();
@@ -43,6 +44,12 @@ class ChatController extends BaseController {
     update();
   }
 
+  void updateSeenMessage() {
+    messages?.forEach((element) {
+      element.isSeen = true;
+    });
+    update();
+  }
 
 //============================ life cycle ======================================
   @override

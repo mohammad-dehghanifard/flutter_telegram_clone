@@ -44,8 +44,10 @@ class ChatMessageWidget extends StatelessWidget {
                     ),
                     child: Text(message.text ?? "")),
                 const W(20),
-                Text(message.date ?? "",style: context.textTheme.bodySmall)
-
+                Text(message.date ?? "",style: context.textTheme.bodySmall),
+                const W(4),
+                if(isSendMessage)
+                  Icon(message.isSeen!? Icons.done_all : Icons.check,size: 14,),
               ],
             ),
           ),
