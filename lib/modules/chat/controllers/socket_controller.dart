@@ -1,4 +1,5 @@
 import 'package:flutter_telegram_clone/backend/models/message.dart';
+import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/helpers/utils/constants.dart';
 import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
@@ -10,7 +11,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 class SocketController extends BaseController {
 //====================== variables =============================================
  late Socket socket;
-
+ ChatController get chatController => Get.find<ChatController>();
 //====================== methods ===============================================
   void _initSocket() {
    socket = io(socketUrl,OptionBuilder().setTransports(['websocket']).build());
@@ -32,7 +33,7 @@ class SocketController extends BaseController {
   socket.on("receiveMessage", (data) {
    final Message message = Message.fromJson(data["message"]);
       if (Get.isRegistered<ChatController>()) {
-        Get.find<ChatController>().addMessageToList(message);
+       chatController.addMessageToList(message);
         seenMessage(message.conversationId!);
       }
       Get.find<HomeController>().updateConversation(message);
@@ -64,7 +65,7 @@ class SocketController extends BaseController {
     socket.on("seenMessage", (data) {
       if(Get.isRegistered<ChatController>()){
         if(Get.find<ChatController>().id == data['conversationId']){
-          Get.find<ChatController>().updateSeenMessage();
+         chatController.updateSeenMessage();
         }
       }
     });
@@ -73,8 +74,10 @@ class SocketController extends BaseController {
   void listenToTyping() {
     socket.on("userTyping", (data) {
       if(Get.isRegistered<ChatController>()){
+        final User user = User.fromJson(data["user"]);
         if(Get.find<ChatController>().id == data['conversationId']){
-          Get.find<ChatController>().toggleTyping();
+         chatController.toggleTyping();
+         chatController.addUserToTyping(user);
         }
       }
     });
@@ -82,7 +85,8 @@ class SocketController extends BaseController {
     socket.on("userStoppedTyping", (data) {
       if(Get.isRegistered<ChatController>()){
         if(Get.find<ChatController>().id == data['conversationId']){
-          Get.find<ChatController>().toggleTyping();
+         chatController.toggleTyping();
+         chatController.removeUserTypingInGroup(data['userId']);
         }
       }
     });

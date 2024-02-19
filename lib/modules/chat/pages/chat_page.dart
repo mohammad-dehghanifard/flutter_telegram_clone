@@ -19,10 +19,16 @@ class ChatPage extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.theme.colorScheme.secondaryContainer,
           bottomNavigationBar:  const ChatSendBoxWidget(),
-          body:  SafeArea(
+          body: SafeArea(
             child: Column(
               children: [
-                 ChatAppBarWidget(title: conversation.name ?? "",avatar: conversation.image ?? "",typing: buildController.isTyping),
+                 ChatAppBarWidget(
+                     title: conversation.name ?? "",
+                     avatar: conversation.image ?? "",
+                     typing: buildController.isTyping,
+                      type: conversation.type!,
+                      userTyping: buildController.usersTyping,
+                 ),
                   buildController.messages == null
                       ? const Center(child: LoadingWidget())
                       :  ChatListWidget(

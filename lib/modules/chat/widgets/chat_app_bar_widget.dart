@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/chat_controller.dart';
 import 'package:get/get.dart';
 
 class ChatAppBarWidget extends StatelessWidget {
-  const ChatAppBarWidget({super.key, required this.title, required this.avatar,this.typing = false});
+  const ChatAppBarWidget({super.key, required this.title, required this.avatar,this.typing = false, this.userTyping, required this.type});
   final String title;
   final String avatar;
+  final String type;
   final bool typing;
+  final List<User>? userTyping;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,8 +34,15 @@ class ChatAppBarWidget extends StatelessWidget {
           Text(title,style: context.textTheme.titleMedium),
           const W(12),
           Visibility(
-              visible: typing,
+              visible: typing && type == "PRIVATE" ,
               child: Text("در حال نوشتن...",style: context.textTheme.bodySmall)),
+
+          Visibility(
+              visible: typing && type == "GROUP",
+              child: Text(
+                  Get.find<ChatController>().getGroupTypingText(userTyping!),
+                  style: context.textTheme.bodySmall)),
+
           const Spacer(),
           const Directionality(
               textDirection: TextDirection.ltr,

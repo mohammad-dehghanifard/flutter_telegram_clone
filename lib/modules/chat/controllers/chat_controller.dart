@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_telegram_clone/backend/models/message.dart';
+import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/backend/repositories/chat_repository.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
@@ -15,6 +16,7 @@ class ChatController extends BaseController {
   final TextEditingController textController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   List<Message>? messages;
+  List<User> usersTyping = [];
   bool isTyping = false;
   bool isUserTyping = false;
 
@@ -70,6 +72,23 @@ class ChatController extends BaseController {
       });
     }
   }
+  // for group typing
+  void addUserToTyping(User user) {
+    if(!usersTyping.contains(user)){
+      usersTyping.add(user);
+      update();
+    }
+  }
+  void removeUserTypingInGroup(int id) {
+    usersTyping.removeWhere((user) => user.id == id);
+    update();
+  }
+  String getGroupTypingText(List<User> users){
+    if(users.length == 1){
+      return "${users.first.name} در حال تایپ است...";
+    }
+    return '${users.length} نفر در حال تایپ هستند...';
+  }
 
 //============================ life cycle ======================================
   @override
@@ -78,4 +97,11 @@ class ChatController extends BaseController {
     getAllMessage();
     super.onInit();
   }
+
+  @override
+  void onClose() {
+    Get.find<SocketController>().stopTyping(id);
+    super.onClose();
+  }
+
 }
