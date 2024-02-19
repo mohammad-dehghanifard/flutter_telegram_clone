@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
 bool validateIranPhoneNumber(String value) {
@@ -29,4 +30,9 @@ Future<String?> getToken() async {
 String convertFileToBase64(File file) {
   var bytes = file.readAsBytesSync();
   return base64Encode(bytes);
+}
+
+String generateRandomNumber(){
+  final number = Random().nextInt(1000) * 90000;
+  return number.toString();
 }
