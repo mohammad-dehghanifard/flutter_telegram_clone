@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 bool validateIranPhoneNumber(String value) {
@@ -22,4 +24,9 @@ Future<String?> getToken() async {
   } else {
     return null;
   }
+}
+
+String convertFileToBase64(File file) {
+  var bytes = file.readAsBytesSync();
+  return base64Encode(bytes);
 }

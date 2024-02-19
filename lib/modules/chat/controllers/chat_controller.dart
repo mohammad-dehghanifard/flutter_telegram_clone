@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/backend/models/user.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
 import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatController extends BaseController {
   ChatController(this.id);
@@ -19,6 +22,7 @@ class ChatController extends BaseController {
   List<User> usersTyping = [];
   bool isTyping = false;
   bool isUserTyping = false;
+  File? selectedImage;
 
 //============================ methods =========================================
   Future<void> getAllMessage() async {
@@ -58,6 +62,14 @@ class ChatController extends BaseController {
   void toggleTyping() {
     isTyping = !isTyping;
     update();
+  }
+
+  Future<void> selectAndSendImage() async {
+    final ImagePicker picker = ImagePicker();
+    final image = await picker.pickImage(source: ImageSource.gallery);
+    if(image != null) {
+      selectedImage = File(image.path);
+    }
   }
 
   void checkUserTyping() {
