@@ -9,7 +9,8 @@ class CircleIconButtonWidget extends StatelessWidget {
     this.width = 38,
     this.height = 38,
     this.iconSize = 18,
-    this.bgColor
+    this.bgColor,
+    this.iconColor
   });
   final IconData icon;
   final Function() onTap;
@@ -17,6 +18,7 @@ class CircleIconButtonWidget extends StatelessWidget {
   final double height;
   final double iconSize;
   final Color? bgColor;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class CircleIconButtonWidget extends StatelessWidget {
             shape: BoxShape.circle,
             color: bgColor ?? context.theme.colorScheme.secondaryContainer
         ),
-        child:  Icon(icon,size: iconSize),
+        child:  Directionality(
+          textDirection: TextDirection.ltr,
+            child: Icon(icon,size: iconSize,color: iconColor)),
       ),
     );
   }

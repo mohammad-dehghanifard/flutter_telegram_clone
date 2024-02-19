@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/chat_controller.dart';
+import 'package:flutter_telegram_clone/modules/chat/widgets/record_voice_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 class ChatSendBoxWidget extends StatelessWidget {
@@ -30,7 +31,9 @@ class ChatSendBoxWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // send voice
-                CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.mic),
+                CircleIconButtonWidget(onTap: () {
+                  showModalBottomSheet(context: context, builder: (context) => const RecordViceBottomSheet());
+                },icon: FeatherIcons.mic),
                 const W(10),
                 // send file
                 CircleIconButtonWidget(onTap: () => Get.find<ChatController>().selectAndSendImage(),icon: FeatherIcons.filePlus),
