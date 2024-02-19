@@ -43,11 +43,19 @@ class ChatMessageImageWidget extends StatelessWidget {
                         maxWidth: 200
                     ),
                     child: LoadNetworkImage(imageUrl: message.file ?? "")),
-                const W(20),
-                Text(message.date ?? "",style: context.textTheme.bodySmall),
-                const W(4),
-                if(isSendMessage)
-                  Icon(message.isSeen!? Icons.done_all : Icons.check,size: 14,),
+                const H(8),
+                SizedBox(
+                  width: 200,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(message.date ?? "",style: context.textTheme.bodySmall),
+                      const W(12),
+                      if(isSendMessage)
+                        Icon(message.isSeen!? Icons.done_all : Icons.check,size: 14,),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

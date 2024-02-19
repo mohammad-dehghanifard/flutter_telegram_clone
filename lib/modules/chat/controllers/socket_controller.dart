@@ -92,6 +92,20 @@ class SocketController extends BaseController {
     });
   }
 
+  void sendImage(
+      {required int conversationId,
+      required String file,
+      required String fileType,
+      required String type}) {
+    socket.emit("sendFile", {
+      "userId": userHelper.user?.id,
+      "conversationId": conversationId,
+      "file" : file,
+      "fileType" : fileType,
+      "type" : type
+    });
+  }
+
 //======================== life cycle ==========================================
   @override
   void onInit() {

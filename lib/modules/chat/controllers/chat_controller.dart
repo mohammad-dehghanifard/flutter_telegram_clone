@@ -5,6 +5,7 @@ import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/backend/models/user.dart';
 import 'package:flutter_telegram_clone/backend/repositories/chat_repository.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
+import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
 import 'package:flutter_telegram_clone/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
@@ -69,6 +70,13 @@ class ChatController extends BaseController {
     final image = await picker.pickImage(source: ImageSource.gallery);
     if(image != null) {
       selectedImage = File(image.path);
+      Get.find<SocketController>().sendImage(
+          conversationId: id,
+          file: convertFileToBase64(selectedImage!),
+          fileType: selectedImage!.path.split('.').last,
+          type: "IMAGE"
+      );
+      update();
     }
   }
 

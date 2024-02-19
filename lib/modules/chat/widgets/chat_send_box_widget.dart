@@ -33,7 +33,7 @@ class ChatSendBoxWidget extends StatelessWidget {
                 CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.mic),
                 const W(10),
                 // send file
-                CircleIconButtonWidget(onTap: () {},icon: FeatherIcons.filePlus),
+                CircleIconButtonWidget(onTap: () => Get.find<ChatController>().selectAndSendImage(),icon: FeatherIcons.filePlus),
                 const W(10),
                 // send message
                 CircleIconButtonWidget(onTap: () => Get.find<ChatController>().sendMessage(),icon: FeatherIcons.send),
