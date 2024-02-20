@@ -92,7 +92,7 @@ class SocketController extends BaseController {
     });
   }
 
-  void sendImage(
+  void sendFile(
       {required int conversationId,
       required String file,
       required String fileType,

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/create_voice_controller.dart';
+import 'package:flutter_telegram_clone/modules/chat/controllers/socket_controller.dart';
 import 'package:get/get.dart';
 
 class PreViewVoiceWidget extends StatefulWidget {
@@ -94,7 +98,16 @@ class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
                       bgColor: context.theme.colorScheme.primary,
                       icon: FeatherIcons.send,
                       iconColor: context.theme.scaffoldBackgroundColor,
-                      onTap: () {},),
+                      onTap: () {
+                        Get.back();
+                        Get.find<SocketController>().sendFile(
+                          conversationId: Get.find<ChatController>().id,
+                          file: convertFileToBase64(File(widget.filePath)),
+                          fileType: "aac",
+                          type: "VOICE");
+
+                      },
+                    ),
                     const Spacer(),
                     // cancel
                     CircleIconButtonWidget(

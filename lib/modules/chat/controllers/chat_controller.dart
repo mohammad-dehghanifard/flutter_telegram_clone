@@ -70,7 +70,7 @@ class ChatController extends BaseController {
     final image = await picker.pickImage(source: ImageSource.gallery);
     if(image != null) {
       selectedImage = File(image.path);
-      Get.find<SocketController>().sendImage(
+      Get.find<SocketController>().sendFile(
           conversationId: id,
           file: convertFileToBase64(selectedImage!),
           fileType: selectedImage!.path.split('.').last,

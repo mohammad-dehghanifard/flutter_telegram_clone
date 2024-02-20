@@ -21,6 +21,8 @@ class ChatListWidget extends StatelessWidget {
             return ChatMessageWidget(message: messages[index]);
           } else if(type == "IMAGE"){
             return ChatMessageImageWidget(message: messages[index]);
+          } else {
+            return ChatMessageWidget(message: messages[index]);
           }
           },
       ),
