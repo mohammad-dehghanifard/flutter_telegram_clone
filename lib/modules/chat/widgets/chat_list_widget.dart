@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'chat_message_image_item.dart';
 import 'chat_message_item.dart';
+import 'chat_voice_message_widget.dart';
 
 class ChatListWidget extends StatelessWidget {
   const ChatListWidget({super.key, required this.messages, required this.scrollController});
@@ -22,10 +23,12 @@ class ChatListWidget extends StatelessWidget {
           } else if(type == "IMAGE"){
             return ChatMessageImageWidget(message: messages[index]);
           } else {
-            return ChatMessageWidget(message: messages[index]);
+            return VoiceMessageWidget(message: messages[index]);
           }
           },
       ),
     );
   }
 }
+
+
