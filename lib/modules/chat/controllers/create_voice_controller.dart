@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_telegram_clone/helpers/utils/base_controller.dart';
 import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
@@ -90,7 +89,9 @@ class CreateVoiceController extends BaseController {
   @override
   void onClose() {
     recorder.closeRecorder();
+    player.dispose();
     super.onClose();
   }
+
 
 }

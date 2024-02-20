@@ -39,7 +39,9 @@ class RecordViceBottomSheet extends StatelessWidget {
                   }
                 }),
               const H(10),
-              Text(formatDuration(Duration(seconds: buildController.recordedTime)),style: context.textTheme.titleLarge),
+              Visibility(
+                visible: buildController.recordedTime != 0,
+                  child: Text(formatDuration(Duration(seconds: buildController.recordedTime)),style: context.textTheme.titleLarge)),
               const H(30),
             ],
           ),

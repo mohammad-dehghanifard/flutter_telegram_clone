@@ -39,13 +39,25 @@ class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
                 Directionality(
                     textDirection: TextDirection.ltr,
                     child: SliderTheme(
-                        data: SliderThemeData(
-                            trackHeight: 7,
-                            inactiveTrackColor: context.theme.colorScheme.primaryContainer,
-                            activeTrackColor: context.theme.colorScheme.secondary
-                        ),
-                        child: Slider(value: 0.4, onChanged: (value) {},))),
-                // time
+                            data: SliderThemeData(
+                                trackHeight: 7,
+                                inactiveTrackColor:
+                                    context.theme.colorScheme.primaryContainer,
+                                activeTrackColor:
+                                    context.theme.colorScheme.secondary),
+                            child: Slider(
+                              value:
+                                  buildController.currentDuration!.inSeconds /
+                                      buildController.duration!.inSeconds,
+                              onChanged: (value) {
+                                buildController.player.seek(Duration(
+                                    seconds:
+                                        (buildController.duration!.inSeconds *
+                                                value)
+                                            .round()));
+                              },
+                            ))),
+                    // time
                 Row(
                   children: [
                     const W(25),
@@ -61,9 +73,15 @@ class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
                   height: 43,
                   iconSize: 14,
                   bgColor: context.theme.colorScheme.primary,
-                  icon: FeatherIcons.play,
+                  icon: buildController.player.playing? FeatherIcons.pause : FeatherIcons.play,
                   iconColor: context.theme.scaffoldBackgroundColor,
-                  onTap: ()  => buildController.player.play()),
+                  onTap: () {
+                     if(buildController.player.playing) {
+                        buildController.player.stop();
+                     } else {
+                       buildController.player.play();
+                     }
+                  }),
                 // send and cancel button
                 Row(
                   children: [
