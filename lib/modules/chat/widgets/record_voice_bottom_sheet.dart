@@ -1,5 +1,6 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/create_voice_controller.dart';
@@ -38,7 +39,7 @@ class RecordViceBottomSheet extends StatelessWidget {
                   }
                 }),
               const H(10),
-              Text(buildController.recordedTime.toString(),style: context.textTheme.titleLarge),
+              Text(formatDuration(Duration(seconds: buildController.recordedTime)),style: context.textTheme.titleLarge),
               const H(30),
             ],
           ),
