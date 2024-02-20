@@ -1,10 +1,11 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
+import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:flutter_telegram_clone/modules/chat/controllers/create_voice_controller.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 
 class PreViewVoiceWidget extends StatefulWidget {
   const PreViewVoiceWidget({super.key, required this.filePath});
@@ -17,15 +18,11 @@ class PreViewVoiceWidget extends StatefulWidget {
 
 class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
 
-
-
   @override
   void initState() {
     Get.find<CreateVoiceController>().initVoiceFileForPlay(widget.filePath);
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
         padding: const EdgeInsets.all(8.0),
         child: GetBuilder<CreateVoiceController>(
           builder: (buildController) {
-            return Column(
+            return buildController.duration == null? const LoadingWidget() : Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // slider
@@ -52,9 +49,9 @@ class _PreViewVoiceWidgetState extends State<PreViewVoiceWidget> {
                 Row(
                   children: [
                     const W(25),
-                    Text("۰۰:۴۲",style: context.textTheme.bodySmall),
+                    Text(formatDuration(Duration(seconds: buildController.currentDuration!.inSeconds)),style: context.textTheme.bodySmall),
                     const Spacer(),
-                    Text("01:43",style: context.textTheme.bodySmall),
+                    Text(formatDuration(Duration(seconds: buildController.duration!.inSeconds)),style: context.textTheme.bodySmall),
                     const W(25),
                   ],
                 ),

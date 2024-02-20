@@ -14,6 +14,7 @@ class CreateVoiceController extends BaseController {
   final FlutterSoundRecorder recorder = FlutterSoundRecorder();
   final AudioPlayer player = AudioPlayer();
   Duration? duration;
+  Duration? currentDuration;
   int recordedTime = 0;
   Timer? timer;
   bool isRecordInit = false;
@@ -57,6 +58,14 @@ class CreateVoiceController extends BaseController {
 
   Future<void> initVoiceFileForPlay(String filePath) async {
     duration = await player.setFilePath(path);
+    player.positionStream.listen((event) {
+      currentDuration = event;
+      if(currentDuration?.inSeconds == duration?.inSeconds) {
+        player.stop();
+        player.seek(const Duration(seconds: 0));
+      }
+      update();
+    });
     update();
   }
 
