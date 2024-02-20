@@ -3,20 +3,64 @@ import 'package:flutter/material.dart';
 import 'package:flutter_telegram_clone/backend/models/message.dart';
 import 'package:flutter_telegram_clone/helpers/utils/load_network_image.dart';
 import 'package:flutter_telegram_clone/helpers/utils/user_helper.dart';
+import 'package:flutter_telegram_clone/helpers/utils/utils_method.dart';
 import 'package:flutter_telegram_clone/helpers/widget/circle_icon_button_widget.dart';
+import 'package:flutter_telegram_clone/helpers/widget/loading_widget.dart';
 import 'package:flutter_telegram_clone/helpers/widget/sized_widget.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 
-class VoiceMessageWidget extends StatelessWidget {
-  const VoiceMessageWidget({super.key, required this.message});
+class VoiceMessageWidget extends StatefulWidget {
+    const VoiceMessageWidget({super.key, required this.message});
 
   final Message message;
-  bool get isSendMessage => message.senderId == userHelper.user!.id!;
 
   @override
+  State<VoiceMessageWidget> createState() => _VoiceMessageWidgetState();
+}
+
+class _VoiceMessageWidgetState extends State<VoiceMessageWidget> {
+
+   final AudioPlayer player = AudioPlayer();
+    Duration? duration;
+    Duration? currentDuration;
+    bool get isSendMessage => widget.message.senderId == userHelper.user!.id!;
+
+
+   Future<void> initPlayer() async {
+     duration = await player.setUrl(widget.message.file!);
+     player.positionStream.listen((event) {
+       currentDuration = event;
+       if(currentDuration?.inSeconds == duration?.inSeconds){
+         player.stop();
+         player.seek(const Duration(seconds: 0));
+        setState(() {});
+       }
+       setState(() {});
+     });
+   }
+
+   void playAndStopVoice(){
+     if(player.playing){
+       player.pause();
+     } else {
+       player.play();
+     }
+   }
+
+   void onChangeDuration(double value) => player.seek(Duration(seconds: (duration!.inSeconds * value).round()));
+
+
+   @override
+  void initState() {
+     initPlayer();
+    super.initState();
+  }
+
+   @override
   Widget build(BuildContext context) {
-    return Align(
+    return duration == null ? const LoadingWidget() :Align(
       alignment: isSendMessage? Alignment.centerRight :Alignment.centerLeft,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -41,6 +85,7 @@ class VoiceMessageWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // play button and slider
                 Row(
                   children: [
                     CircleIconButtonWidget(
@@ -48,9 +93,9 @@ class VoiceMessageWidget extends StatelessWidget {
                       height: 35,
                       iconSize: 14,
                       bgColor: context.theme.colorScheme.primary,
-                      icon: FeatherIcons.play,
+                      icon: player.playing? FeatherIcons.pause : FeatherIcons.play,
                       iconColor: context.theme.scaffoldBackgroundColor,
-                      onTap: () {},
+                      onTap: () => playAndStopVoice(),
                     ),
                     Directionality(
                         textDirection: isSendMessage?TextDirection.rtl :TextDirection.ltr,
@@ -61,21 +106,22 @@ class VoiceMessageWidget extends StatelessWidget {
                                 inactiveTrackColor: context.theme.scaffoldBackgroundColor,
                                 activeTrackColor: context.theme.colorScheme.secondary),
                             child: Slider(
-                              value: 0.6,
-                              onChanged: (value) {},
+                              value: currentDuration!.inSeconds / duration!.inSeconds ,
+                              onChanged: (value) => onChangeDuration(value),
                             ))),
                   ],
                 ),
+                // times
                 Row(
                   children: [
                     const W(60),
-                    Text("12:00",style: context.textTheme.bodySmall),
+                    Text(formatDuration(Duration(seconds: currentDuration!.inSeconds)),style: context.textTheme.bodySmall),
                     const Spacer(),
-                    Text("00:00",style: context.textTheme.bodySmall),
+                    Text(formatDuration(Duration(seconds: duration!.inSeconds)),style: context.textTheme.bodySmall),
                     const W(40),
                   ],
                 ),
-                Text(message.date ?? "",style: context.textTheme.bodySmall),
+                Text(widget.message.date ?? "",style: context.textTheme.bodySmall),
               ],
             ),
           ),
@@ -88,12 +134,13 @@ class VoiceMessageWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle
               ),
-              child: LoadNetworkImage(imageUrl: message.senderAvatar ?? ""),
+              child: LoadNetworkImage(imageUrl: widget.message.senderAvatar ?? ""),
             ),
           ]
 
         ],
       ),
     );
+
   }
 }
